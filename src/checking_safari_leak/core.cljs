@@ -8,7 +8,7 @@
   (go-loop [v (<! in)]
            (if (nil? v) :closed (recur (<! in)))))
 
-(defn memory-leak-check [input-chan]
+(defn has-memory-leak [input-chan]
   (->> input-chan
       (map< identity)
       (map< identity)
@@ -20,60 +20,112 @@
       (map< identity)
       (map< identity)
       (map< identity)
+
       (map< identity)
       (map< identity)
       (map< identity)
       (map< identity)
+
       (map< identity)
       (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)       
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)      
-      dev-null)
+      )
   )
+
+(defn has-memory-leak-as-well [input]
+(map< identity
+(map< identity
+(map< identity
+(map< identity
+(map< identity
+(map< identity
+(map< identity
+(map< identity
+(map< identity
+(map< identity
+(map< identity
+(map< identity
+(map< identity
+(map< identity
+(map< identity
+(map< identity
+(map< identity
+      input))))))))))))))))))
+
+(def no-memory-leak
+  (comp
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)    
+   
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)
+   (partial map< identity)))
 
 (defn data []
   (mapv identity (range 1000)))
 
-
 (def output-data (atom []))
 
 (defn doit []
-  (let [output-data (atom [])
-        start-time (.getTime (js/Date.))]
+  (let [output-data (atom [])]
     (add-watch output-data :output-change (fn [_ _ _ n]
                                             (set! (.-innerHTML (.getElementById js/document "main-area"))
                                                   (apply str
-                                                         (map (fn [x] (str "<div><em>" (:iter x) "</em> time: " (:time x) "ms </div>"))
+                                                         (map (fn [x] (str "<div> time: " (:time x) "ms </div>"))
                                                               n)))))
     (let [input (chan)
-          output (memory-leak-check input)]
+          output (no-memory-leak input)
+          start-time (.getTime (js/Date.))]
       (mapv (fn [x]
-              (swap! output-data conj { :iter x :time (- (.getTime (js/Date.)) start-time) })
               (put! input (data)))
-            (range 12)))))
-
-
+            (range 12))
+      (go-loop []
+               (<! output)
+               (swap! output-data conj { :time (- (.getTime (js/Date.)) start-time) })
+               (recur)))))
 
 (enable-console-print!)
 
