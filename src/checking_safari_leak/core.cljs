@@ -114,7 +114,7 @@
     (add-watch output-data :output-change (fn [_ _ _ n]
                                             (set! (.-innerHTML (.getElementById js/document "main-area"))
                                                   (apply str
-                                                         (map (fn [x] (str "<div> time: " (:time x) "ms </div>"))
+                                                         (map (fn [x] (str "<div> timer: " (:time x) "ms </div>"))
                                                               n)))))
     (let [input (chan)
           output (has-memory-leak input)
