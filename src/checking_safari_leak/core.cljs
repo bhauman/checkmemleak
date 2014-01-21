@@ -1,5 +1,6 @@
 (ns checking-safari-leak.core
   (:require
+   [clojure.string :as s]
    [cljs.core.async :as async
     :refer [<! map< put! chan]])
   (:require-macros [cljs.core.async.macros :as m :refer [go alt! go-loop]]))
@@ -129,4 +130,19 @@
 
 (enable-console-print!)
 
+<<<<<<< HEAD
 (doit no-memory-leak)
+=======
+(let [leak (= "true" (last (s/split (.-href js/location) #"leak=")))]
+  (if leak
+    (do (set! (.-innerHTML (.getElementById js/document "leaky")) "Leaking now")
+      (doit has-memory-leak))
+    (doit no-memory-leak)
+    ))
+
+
+
+
+
+
+>>>>>>> master
