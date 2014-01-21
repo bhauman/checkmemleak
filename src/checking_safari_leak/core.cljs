@@ -109,7 +109,7 @@
 
 (def output-data (atom []))
 
-(defn doit []
+(defn doit [f]
   (let [output-data (atom [])]
     (add-watch output-data :output-change (fn [_ _ _ n]
                                             (set! (.-innerHTML (.getElementById js/document "main-area"))
@@ -117,7 +117,7 @@
                                                          (map (fn [x] (str "<div> timer: " (:time x) "ms </div>"))
                                                               n)))))
     (let [input (chan)
-          output (has-memory-leak input)
+          output (f input)
           start-time (.getTime (js/Date.))]
       (mapv (fn [x]
               (put! input (data)))
@@ -129,4 +129,4 @@
 
 (enable-console-print!)
 
-(doit)
+(doit no-memory-leak)
