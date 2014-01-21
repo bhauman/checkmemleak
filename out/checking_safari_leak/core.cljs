@@ -130,15 +130,10 @@
 
 (enable-console-print!)
 
+
 (let [leak (= "true" (last (s/split (.-href js/location) #"leak=")))]
   (if leak
     (do (set! (.-innerHTML (.getElementById js/document "leaky")) "Leaking now")
       (doit has-memory-leak))
     (doit no-memory-leak)
     ))
-
-
-
-
-
-
