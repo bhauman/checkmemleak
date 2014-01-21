@@ -117,7 +117,7 @@
                                                          (map (fn [x] (str "<div> time: " (:time x) "ms </div>"))
                                                               n)))))
     (let [input (chan)
-          output (no-memory-leak input)
+          output (has-memory-leak input)
           start-time (.getTime (js/Date.))]
       (mapv (fn [x]
               (put! input (data)))
