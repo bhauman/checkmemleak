@@ -5,9 +5,6 @@
     :refer [<! map< map> put! chan]])
   (:require-macros [cljs.core.async.macros :as m :refer [go alt! go-loop]]))
 
-(defn dev-null [in]
-  (go-loop [v (<! in)]
-           (if (nil? v) :closed (recur (<! in)))))
 
 (defn mymap [f in]
   (let [out (chan)]
@@ -20,23 +17,24 @@
       :map<-chain
       (fn has-memory-leak-as-well [input]
         (map< identity
-              (map< identity
-                    (map< identity
-                          (map< identity
-                                (map< identity
-                                      (map< identity
-                                            (map< identity
-                                                  (map< identity
-                                                        (map< identity
-                                                              (map< identity
-                                                                    (map< identity
+        (map< identity
+        (map< identity
+        (map< identity
+        (map< identity
+        (map< identity
+        (map< identity
+        (map< identity
+        (map< identity
+        (map< identity
+        (map< identity
                                                                           (map< identity
                                                                                 (map< identity
                                                                                       (map< identity
                                                                                             (map< identity
                                                                                                   (map< identity
                                                                                                         (map< identity
-                                                                                                              input))))))))))))))))))
+                                                                                                              (map< identity
+                                                                                                                    input)))))))))))))))))))
       
       :map< (fn [input-chan]
               (->> input-chan
@@ -50,19 +48,16 @@
                    (map< identity)
                    (map< identity)
                    (map< identity)
-                   
                    (map< identity)
                    (map< identity)
                    (map< identity)
                    (map< identity)
-                   
-                                        ;      (map< identity)
-                                        ;      (map< identity)
-                   
-                                        ;      (map< identity)
-                                        ;      (map< identity)      
-                   
-                   )) 
+                   (map< identity)
+                   (map< identity)
+                   (map< identity)
+                   (map< identity)      
+                   ))
+             
       :map> (fn [input-chan]
               (->> input-chan
                    (map> identity)
@@ -75,18 +70,14 @@
                    (map> identity)
                    (map> identity)
                    (map> identity)
-
                    (map> identity)
                    (map> identity)
                    (map> identity)
                    (map> identity)
-
-                                        ;      (map> identity)
-                                        ;      (map> identity)
-
-                                        ;      (map> identity)
-                                        ;      (map> identity)      
-                   
+                   (map> identity)
+                   (map> identity)
+                   (map> identity)
+                   (map> identity)      
                    ))
 
       :custom-map (defn has-memory-leak-mymap [input-chan]
@@ -101,17 +92,14 @@
                          (mymap identity)
                          (mymap identity)
                          (mymap identity)
-
                          (mymap identity)
                          (mymap identity)
                          (mymap identity)
                          (mymap identity)
-
-                                        ;      (mymap identity)
-                                        ;      (mymap identity)
-
-                                        ;      (mymap identity)
-                                        ;      (mymap identity)      
+                         (mymap identity)
+                         (mymap identity)
+                         (mymap identity)
+                         (mymap identity)      
                          )
                     )
 
@@ -133,7 +121,8 @@
                                                (let [a (map< identity a)]
                                                  (let [a (map< identity a)]
                                                    (let [a (map< identity a)]
-                                                     a))))))))))))))))))
+                                                     (let [a (map< identity a)]
+                                                       a)))))))))))))))))))
 
       :comp-partial (comp
                      (partial map< identity)
@@ -190,14 +179,6 @@
       }
 
   )
-
-
-
-
-
-
-
-
 
 (defn data []
   (mapv identity (range 1000)))

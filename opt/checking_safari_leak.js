@@ -15031,12 +15031,12 @@ cljs.core.async.do_alts = function(a, b, c) {
       if (c < e) {
         var h = cljs.core.truth_(g) ? c : f[c], k = cljs.core.nth.call(null, b, h), n = cljs.core.vector_QMARK_.call(null, k) ? k.call(null, 0) : null, q = cljs.core.truth_(n) ? function() {
           var b = k.call(null, 1);
-          return cljs.core.async.impl.protocols.put_BANG_.call(null, n, b, cljs.core.async.alt_handler.call(null, d, function(b, c, d, e, f, g, k, h, l) {
+          return cljs.core.async.impl.protocols.put_BANG_.call(null, n, b, cljs.core.async.alt_handler.call(null, d, function(b, c, d, e, g, f, k, h, l) {
             return function() {
-              return a.call(null, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [null, f], null));
+              return a.call(null, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [null, g], null));
             };
           }(c, b, h, k, n, d, e, f, g)));
-        }() : cljs.core.async.impl.protocols.take_BANG_.call(null, k, cljs.core.async.alt_handler.call(null, d, function(b, c, d, e, f, g, k, h) {
+        }() : cljs.core.async.impl.protocols.take_BANG_.call(null, k, cljs.core.async.alt_handler.call(null, d, function(b, c, d, e, g, f, k, h) {
           return function(b) {
             return a.call(null, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [b, d], null));
           };
@@ -15090,13 +15090,13 @@ cljs.core.async.map_LT_ = function map_LT_(b, c) {
     return cljs.core.async.impl.protocols.put_BANG_.call(null, this.ch, c, f);
   }, cljs.core.async.t9569.prototype.cljs$core$async$impl$protocols$ReadPort$ = !0, cljs.core.async.t9569.prototype.cljs$core$async$impl$protocols$ReadPort$take_BANG_$arity$2 = function(b, c) {
     var f = this, g = this, h = cljs.core.async.impl.protocols.take_BANG_.call(null, f.ch, function() {
-      "undefined" === typeof cljs.core.async.t9572 && (cljs.core.async.t9572 = function(b, c, d, e, f, g, h) {
+      "undefined" === typeof cljs.core.async.t9572 && (cljs.core.async.t9572 = function(b, c, d, e, g, f, h) {
         this.fn1 = b;
         this._ = c;
         this.meta9570 = d;
         this.ch = e;
-        this.f = f;
-        this.map_LT_ = g;
+        this.f = g;
+        this.map_LT_ = f;
         this.meta9573 = h;
         this.cljs$lang$protocol_mask$partition1$ = 0;
         this.cljs$lang$protocol_mask$partition0$ = 393216;
@@ -15117,8 +15117,8 @@ cljs.core.async.map_LT_ = function map_LT_(b, c) {
         return this.meta9573;
       }, cljs.core.async.t9572.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(b, c) {
         return new cljs.core.async.t9572(this.fn1, this._, this.meta9570, this.ch, this.f, this.map_LT_, c);
-      }, cljs.core.async.__GT_t9572 = function(b, c, d, e, f, g, h) {
-        return new cljs.core.async.t9572(b, c, d, e, f, g, h);
+      }, cljs.core.async.__GT_t9572 = function(b, c, d, e, g, f, h) {
+        return new cljs.core.async.t9572(b, c, d, e, g, f, h);
       });
       return new cljs.core.async.t9572(c, g, f.meta9570, f.ch, f.f, f.map_LT_, null);
     }());
@@ -17423,68 +17423,6 @@ cljs.core.async.partition_by = function() {
   return a;
 }();
 var checking_safari_leak = {core:{}};
-checking_safari_leak.core.dev_null = function(a) {
-  var b = cljs.core.async.chan.call(null, 1);
-  cljs.core.async.impl.dispatch.run.call(null, function() {
-    var c = function() {
-      return function(a) {
-        return function() {
-          var b = null, c = function() {
-            var a = [null, null, null, null, null, null, null, null];
-            a[0] = b;
-            a[1] = 1;
-            return a;
-          }, d = function(b) {
-            for (;;) {
-              var c = function() {
-                try {
-                  for (;;) {
-                    var c = a.call(null, b);
-                    if (!cljs.core.keyword_identical_QMARK_.call(null, c, new cljs.core.Keyword(null, "recur", "recur", 1122293407))) {
-                      return c;
-                    }
-                  }
-                } catch (d) {
-                  if (d instanceof Object) {
-                    return b[5] = d, cljs.core.async.impl.ioc_helpers.process_exception.call(null, b), new cljs.core.Keyword(null, "recur", "recur", 1122293407);
-                  }
-                  if (new cljs.core.Keyword(null, "else", "else", 1017020587)) {
-                    throw d;
-                  }
-                  return null;
-                }
-              }();
-              if (!cljs.core.keyword_identical_QMARK_.call(null, c, new cljs.core.Keyword(null, "recur", "recur", 1122293407))) {
-                return c;
-              }
-            }
-          }, b = function(a) {
-            switch(arguments.length) {
-              case 0:
-                return c.call(this);
-              case 1:
-                return d.call(this, a);
-            }
-            throw Error("Invalid arity: " + arguments.length);
-          };
-          b.cljs$core$IFn$_invoke$arity$0 = c;
-          b.cljs$core$IFn$_invoke$arity$1 = d;
-          return b;
-        }();
-      }(function(b) {
-        var c = b[1];
-        return 8 === c ? (c = b[2], b[7] = c, b[2] = null, b[1] = 3, new cljs.core.Keyword(null, "recur", "recur", 1122293407)) : 7 === c ? (c = b[2], b[2] = c, b[1] = 4, new cljs.core.Keyword(null, "recur", "recur", 1122293407)) : 6 === c ? cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, b, 8, a) : 5 === c ? (b[2] = new cljs.core.Keyword(null, "closed", "closed", 3951351006), b[1] = 7, new cljs.core.Keyword(null, "recur", "recur", 1122293407)) : 4 === c ? (c = b[2], cljs.core.async.impl.ioc_helpers.return_chan.call(null, 
-        b, c)) : 3 === c ? (c = b[7], cljs.core.truth_(null == c) ? b[1] = 5 : b[1] = 6, new cljs.core.Keyword(null, "recur", "recur", 1122293407)) : 2 === c ? (c = b[2], b[7] = c, b[2] = null, b[1] = 3, new cljs.core.Keyword(null, "recur", "recur", 1122293407)) : 1 === c ? cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, b, 2, a) : null;
-      });
-    }(), d = function() {
-      var a = c.call(null);
-      a[cljs.core.async.impl.ioc_helpers.USER_START_IDX] = b;
-      return a;
-    }();
-    return cljs.core.async.impl.ioc_helpers.run_state_machine_wrapped.call(null, d);
-  });
-  return b;
-};
 checking_safari_leak.core.mymap = function(a, b) {
   var c = cljs.core.async.chan.call(null), d = cljs.core.async.chan.call(null, 1);
   cljs.core.async.impl.dispatch.run.call(null, function() {
@@ -17548,17 +17486,19 @@ checking_safari_leak.core.mymap = function(a, b) {
 };
 checking_safari_leak.core.routes = new cljs.core.PersistentArrayMap(null, 6, [new cljs.core.Keyword(null, "map\x3c-chain", "map\x3c-chain", 2559155334), function(a) {
   return cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, 
-  cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, a)))))))))))))))));
+  cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, a))))))))))))))))));
 }, new cljs.core.Keyword(null, "map\x3c", "map\x3c", 1017248210), function(a) {
   return cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, 
-  cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, a))))))))))))));
+  cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, cljs.core.async.map_LT_.call(null, cljs.core.identity, a))))))))))))))))));
 }, new cljs.core.Keyword(null, "map\x3e", "map\x3e", 1017248212), function(a) {
   return cljs.core.async.map_GT_.call(null, cljs.core.identity, cljs.core.async.map_GT_.call(null, cljs.core.identity, cljs.core.async.map_GT_.call(null, cljs.core.identity, cljs.core.async.map_GT_.call(null, cljs.core.identity, cljs.core.async.map_GT_.call(null, cljs.core.identity, cljs.core.async.map_GT_.call(null, cljs.core.identity, cljs.core.async.map_GT_.call(null, cljs.core.identity, cljs.core.async.map_GT_.call(null, cljs.core.identity, cljs.core.async.map_GT_.call(null, cljs.core.identity, 
-  cljs.core.async.map_GT_.call(null, cljs.core.identity, cljs.core.async.map_GT_.call(null, cljs.core.identity, cljs.core.async.map_GT_.call(null, cljs.core.identity, cljs.core.async.map_GT_.call(null, cljs.core.identity, cljs.core.async.map_GT_.call(null, cljs.core.identity, a))))))))))))));
+  cljs.core.async.map_GT_.call(null, cljs.core.identity, cljs.core.async.map_GT_.call(null, cljs.core.identity, cljs.core.async.map_GT_.call(null, cljs.core.identity, cljs.core.async.map_GT_.call(null, cljs.core.identity, cljs.core.async.map_GT_.call(null, cljs.core.identity, cljs.core.async.map_GT_.call(null, cljs.core.identity, cljs.core.async.map_GT_.call(null, cljs.core.identity, cljs.core.async.map_GT_.call(null, cljs.core.identity, cljs.core.async.map_GT_.call(null, cljs.core.identity, a))))))))))))))))));
 }, new cljs.core.Keyword(null, "custom-map", "custom-map", 3726014578), checking_safari_leak.core.has_memory_leak_mymap = function(a) {
   return checking_safari_leak.core.mymap.call(null, cljs.core.identity, checking_safari_leak.core.mymap.call(null, cljs.core.identity, checking_safari_leak.core.mymap.call(null, cljs.core.identity, checking_safari_leak.core.mymap.call(null, cljs.core.identity, checking_safari_leak.core.mymap.call(null, cljs.core.identity, checking_safari_leak.core.mymap.call(null, cljs.core.identity, checking_safari_leak.core.mymap.call(null, cljs.core.identity, checking_safari_leak.core.mymap.call(null, cljs.core.identity, 
-  checking_safari_leak.core.mymap.call(null, cljs.core.identity, checking_safari_leak.core.mymap.call(null, cljs.core.identity, checking_safari_leak.core.mymap.call(null, cljs.core.identity, checking_safari_leak.core.mymap.call(null, cljs.core.identity, checking_safari_leak.core.mymap.call(null, cljs.core.identity, checking_safari_leak.core.mymap.call(null, cljs.core.identity, a))))))))))))));
+  checking_safari_leak.core.mymap.call(null, cljs.core.identity, checking_safari_leak.core.mymap.call(null, cljs.core.identity, checking_safari_leak.core.mymap.call(null, cljs.core.identity, checking_safari_leak.core.mymap.call(null, cljs.core.identity, checking_safari_leak.core.mymap.call(null, cljs.core.identity, checking_safari_leak.core.mymap.call(null, cljs.core.identity, checking_safari_leak.core.mymap.call(null, cljs.core.identity, checking_safari_leak.core.mymap.call(null, cljs.core.identity, 
+  checking_safari_leak.core.mymap.call(null, cljs.core.identity, checking_safari_leak.core.mymap.call(null, cljs.core.identity, a))))))))))))))))));
 }, new cljs.core.Keyword(null, "let-based", "let-based", 4560534771), function(a) {
+  a = cljs.core.async.map_LT_.call(null, cljs.core.identity, a);
   a = cljs.core.async.map_LT_.call(null, cljs.core.identity, a);
   a = cljs.core.async.map_LT_.call(null, cljs.core.identity, a);
   a = cljs.core.async.map_LT_.call(null, cljs.core.identity, a);
@@ -17667,17 +17607,17 @@ checking_safari_leak.core.doit = function(a) {
   return f;
 };
 cljs.core.enable_console_print_BANG_.call(null);
-var leak_16058 = cljs.core.last.call(null, clojure.string.split.call(null, location.href, /#/)), nav_16059 = clojure.string.join.call(null, "", cljs.core.map.call(null, function(a) {
+var leak_18342 = cljs.core.last.call(null, clojure.string.split.call(null, location.href, /#/)), nav_18343 = clojure.string.join.call(null, "", cljs.core.map.call(null, function(a) {
   return function(a) {
     return[cljs.core.str(' \x3ca href\x3d"#'), cljs.core.str(a), cljs.core.str('"\x3e'), cljs.core.str(a), cljs.core.str("\x3c/a\x3e ")].join("");
   };
-}(leak_16058), cljs.core.map.call(null, cljs.core.name, cljs.core.keys.call(null, checking_safari_leak.core.routes))));
-document.getElementById("nav").innerHTML = nav_16059;
-var temp__4090__auto___16060 = cljs.core.keyword.call(null, leak_16058).call(null, checking_safari_leak.core.routes);
-if (cljs.core.truth_(temp__4090__auto___16060)) {
-  var f_16061 = temp__4090__auto___16060;
-  document.getElementById("leaky").innerHTML = leak_16058;
-  checking_safari_leak.core.doit.call(null, f_16061);
+}(leak_18342), cljs.core.map.call(null, cljs.core.name, cljs.core.keys.call(null, checking_safari_leak.core.routes))));
+document.getElementById("nav").innerHTML = nav_18343;
+var temp__4090__auto___18344 = cljs.core.keyword.call(null, leak_18342).call(null, checking_safari_leak.core.routes);
+if (cljs.core.truth_(temp__4090__auto___18344)) {
+  var f_18345 = temp__4090__auto___18344;
+  document.getElementById("leaky").innerHTML = leak_18342;
+  checking_safari_leak.core.doit.call(null, f_18345);
 } else {
   document.getElementById("leaky").innerHTML = "no operation for that route";
 }
