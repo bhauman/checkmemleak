@@ -350,23 +350,3 @@ cljs.core.async.impl.timers.skip_list = (function skip_list(){return (new cljs.c
 });
 cljs.core.async.impl.timers.timeouts_map = cljs.core.async.impl.timers.skip_list.call(null);
 cljs.core.async.impl.timers.TIMEOUT_RESOLUTION_MS = 10;
-/**
-* returns a channel that will close after msecs
-*/
-cljs.core.async.impl.timers.timeout = (function timeout(msecs){var timeout__$1 = ((new Date()).valueOf() + msecs);var me = cljs.core.async.impl.timers.timeouts_map.ceilingEntry(timeout__$1);var or__3406__auto__ = (cljs.core.truth_((function (){var and__3394__auto__ = me;if(cljs.core.truth_(and__3394__auto__))
-{return (me.key < (timeout__$1 + cljs.core.async.impl.timers.TIMEOUT_RESOLUTION_MS));
-} else
-{return and__3394__auto__;
-}
-})())?me.val:null);if(cljs.core.truth_(or__3406__auto__))
-{return or__3406__auto__;
-} else
-{var timeout_channel = cljs.core.async.impl.channels.chan.call(null,null);cljs.core.async.impl.timers.timeouts_map.put(timeout__$1,timeout_channel);
-cljs.core.async.impl.dispatch.queue_delay.call(null,(function (){cljs.core.async.impl.timers.timeouts_map.remove(timeout__$1);
-return cljs.core.async.impl.protocols.close_BANG_.call(null,timeout_channel);
-}),msecs);
-return timeout_channel;
-}
-});
-
-//# sourceMappingURL=timers.js.map

@@ -224,8 +224,11 @@
 
 (enable-console-print!)
 
-
-(let [leak (last (s/split (.-href js/location) #"#"))]
+(let [leak (last (s/split (.-href js/location) #"#"))
+      nav (s/join "" (map (fn [k] (str " <a href=\"#" k "\">" k "</a> ")) (map name (keys routes))))]
+  (set! (.-innerHTML (.getElementById js/document "nav"))
+        nav)
+  
   (if-let [f ((keyword leak) routes)] 
     (do (set! (.-innerHTML (.getElementById js/document "leaky")) leak)
         (doit f))
