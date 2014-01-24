@@ -2,111 +2,183 @@
   (:require
    [clojure.string :as s]
    [cljs.core.async :as async
-    :refer [<! map< put! chan]])
+    :refer [<! map< map> put! chan]])
   (:require-macros [cljs.core.async.macros :as m :refer [go alt! go-loop]]))
 
-(defn dev-null [in]
-  (go-loop [v (<! in)]
-           (if (nil? v) :closed (recur (<! in)))))
 
-(defn has-memory-leak [input-chan]
-  (->> input-chan
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)
+(defn mymap [f in]
+  (let [out (chan)]
+    (go-loop []
+             (put! out (f (<! in)))
+             (recur))
+    out))
 
-      (map< identity)
-      (map< identity)
-      (map< identity)
-      (map< identity)
-
-      (map< identity)
-      (map< identity)
-
-      (map< identity)
+(def routes {
+      :map<-chain
+      (fn has-memory-leak-as-well [input]
+        (map< identity
+        (map< identity
+        (map< identity
+        (map< identity
+        (map< identity
+        (map< identity
+        (map< identity
+        (map< identity
+        (map< identity
+        (map< identity
+        (map< identity
+                                                                          (map< identity
+                                                                                (map< identity
+                                                                                      (map< identity
+                                                                                            (map< identity
+                                                                                                  (map< identity
+                                                                                                        (map< identity
+                                                                                                              (map< identity
+                                                                                                                    input)))))))))))))))))))
       
-      )
+      :map< (fn [input-chan]
+              (->> input-chan
+                   (map< identity)
+                   (map< identity)
+                   (map< identity)
+                   (map< identity)
+                   (map< identity)
+                   (map< identity)
+                   (map< identity)
+                   (map< identity)
+                   (map< identity)
+                   (map< identity)
+                   (map< identity)
+                   (map< identity)
+                   (map< identity)
+                   (map< identity)
+                   (map< identity)
+                   (map< identity)
+                   (map< identity)
+                   (map< identity)      
+                   ))
+             
+      :map> (fn [input-chan]
+              (->> input-chan
+                   (map> identity)
+                   (map> identity)
+                   (map> identity)
+                   (map> identity)
+                   (map> identity)
+                   (map> identity)
+                   (map> identity)
+                   (map> identity)
+                   (map> identity)
+                   (map> identity)
+                   (map> identity)
+                   (map> identity)
+                   (map> identity)
+                   (map> identity)
+                   (map> identity)
+                   (map> identity)
+                   (map> identity)
+                   (map> identity)      
+                   ))
+
+      :custom-map (defn has-memory-leak-mymap [input-chan]
+                    (->> input-chan
+                         (mymap identity)
+                         (mymap identity)
+                         (mymap identity)
+                         (mymap identity)
+                         (mymap identity)
+                         (mymap identity)
+                         (mymap identity)
+                         (mymap identity)
+                         (mymap identity)
+                         (mymap identity)
+                         (mymap identity)
+                         (mymap identity)
+                         (mymap identity)
+                         (mymap identity)
+                         (mymap identity)
+                         (mymap identity)
+                         (mymap identity)
+                         (mymap identity)      
+                         )
+                    )
+
+      :let-based (fn [input-chan]
+                   (let [a (map< identity input-chan)]
+                     (let [a (map< identity a)]
+                       (let [a (map< identity a)]
+                         (let [a (map< identity a)]
+                           (let [a (map< identity a)]
+                             (let [a (map< identity a)]
+                               (let [a (map< identity a)]
+                                 (let [a (map< identity a)]
+                                   (let [a (map< identity a)]
+                                     (let [a (map< identity a)]
+                                       (let [a (map< identity a)]
+                                         (let [a (map< identity a)]
+                                           (let [a (map< identity a)]
+                                             (let [a (map< identity a)]
+                                               (let [a (map< identity a)]
+                                                 (let [a (map< identity a)]
+                                                   (let [a (map< identity a)]
+                                                     (let [a (map< identity a)]
+                                                       a)))))))))))))))))))
+
+      :comp-partial (comp
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)    
+                     
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity)
+                     (partial map< identity))
+      
+      }
+
   )
-
-(defn has-memory-leak-as-well [input]
-(map< identity
-(map< identity
-(map< identity
-(map< identity
-(map< identity
-(map< identity
-(map< identity
-(map< identity
-(map< identity
-(map< identity
-(map< identity
-(map< identity
-(map< identity
-(map< identity
-(map< identity
-(map< identity
-(map< identity
-      input))))))))))))))))))
-
-(def no-memory-leak
-  (comp
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)    
-   
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)
-   (partial map< identity)))
 
 (defn data []
   (mapv identity (range 1000)))
@@ -133,11 +205,13 @@
 
 (enable-console-print!)
 
-(let [leak (= "true" (last (s/split (.-href js/location) #"leak=")))]
-  (if leak
-    (do (set! (.-innerHTML (.getElementById js/document "leaky")) "Leaking now")
-      (doit has-memory-leak))
-    (doit no-memory-leak)
+(let [leak (last (s/split (.-href js/location) #"#"))
+      nav (s/join "" (map (fn [k] (str " <a href=\"#" k "\">" k "</a> ")) (map name (keys routes))))]
+  (set! (.-innerHTML (.getElementById js/document "nav"))
+        nav)
+  
+  (if-let [f ((keyword leak) routes)] 
+    (do (set! (.-innerHTML (.getElementById js/document "leaky")) leak)
+        (doit f))
+    (set! (.-innerHTML (.getElementById js/document "leaky") ) "no operation for that route")
     ))
-
-

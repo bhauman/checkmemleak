@@ -11,10 +11,17 @@
   :source-paths ["src"]
 
   :cljsbuild { 
-    :builds [{:id "checking-safari-leak"
+    :builds [{:id "check-none"
               :source-paths ["src"]
               :compiler {
                 :output-to "checking_safari_leak.js"
                 :output-dir "out"
                 :optimizations :none
-                :source-map true}}]})
+                         :source-map true}}
+             {:id "check-simple"
+              :source-paths ["src"]
+              :compiler {
+                         :output-to "opt/checking_safari_leak.js"
+                         :optimizations :simple
+                         }}]})
+
